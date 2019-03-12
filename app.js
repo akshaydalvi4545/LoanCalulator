@@ -1,9 +1,17 @@
 const target = document.getElementById('loan-form');
 console.log('asdasd');
 
-target.addEventListener('submit',calculate)
+target.addEventListener('submit',function(e){
 
-function calculate(e){
+//Show Loader
+loadgif();
+//Show  Results
+setTimeout(calculate,3000);
+e.preventDefault();
+})
+
+function calculate(){
+  
   const amount = document.getElementById('amount');
   const interest=document.getElementById('interest');
   const years=document.getElementById('years');
@@ -21,21 +29,83 @@ function calculate(e){
   const monthly = (principal*calulatedInterest)/(1-x);
 
   const TOI=principal*calulatedInterest;
+  
   if(isFinite(monthly))
   {
+    
+    
     monthlypay.value=(monthly).toFixed(2);
     totalpayment.value=(monthly*totalpayments).toFixed(2);;
-    totalInterest.value=((monthly*totalpayments)-principal).toFixed(2);;
+    totalInterest.value=((monthly*totalpayments)-principal).toFixed(2);
+    hidegif();
 
   }
   else{
-
+    showError('Please Check the Number');
   }
 
-  console.log(TOI);
-
-
-
+  setTimeout(reset,5000);
+  console.log(TOI); 
   
-  e.preventDefault();
+}
+
+
+function showError(error)
+{
+  const errorDiv=document.createElement("div");
+  errorDiv.className='errordiv alert alert-danger';
+  const card =document.querySelector('.result-card');
+  const heading =document.querySelector('.result-heading');
+  errorDiv.appendChild(document.createTextNode(error));
+  card.insertBefore(errorDiv,heading);
+  setTimeout(clearError,3000);
+
+  console.log(heading);
+}
+
+function clearError(){
+  document.querySelector('.errordiv').remove();
+}
+
+function loadgif(){
+  const results=document.querySelector('.result-card');
+  const loadImg=document.querySelector('.load-gif');
+  const image=document.getElementById('loadImg');
+  image.src='img/load.gif';
+
+  results.style.display='none';
+  loadImg.style.display='block';
+  
+
+}
+
+
+function hidegif()
+{
+  const results=document.querySelector('.result-card');
+  const loadImg=document.querySelector('.load-gif');
+  results.style.display='block';
+  loadImg.style.display='none';
+}
+
+
+function reset()
+{
+
+  const amount = document.getElementById('amount');
+  const interest=document.getElementById('interest');
+  const years=document.getElementById('years');
+  const monthlypay=document.getElementById('monthly-payment');
+  const totalpayment=document.getElementById('total-payment');
+  const totalInterest=document.getElementById('total-interest');
+  const results=document.querySelector('.result-card');
+  const loadImg=document.querySelector('.load-gif');
+  results.style.display='none';
+  loadImg.style.display='none';
+
+  amount.value='';
+  interest.value='';
+  years.value='';
+
+
 }

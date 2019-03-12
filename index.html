@@ -7,7 +7,10 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <Style>
+    .results{display:none};
+    .load-gif{display:none};
+    </Style>
     <title>Hello, world!</title>
   </head>
   <body class="bg-dark">
@@ -44,10 +47,13 @@
             </div>
           </form>
           <!--Loader Here-->
+          <div class="load-gif">
+            <img id='loadImg'>
+          </div>
           <!--Results Here-->
-          <div class="results">
+          <div class="result-card results">
 
-            <h5 class="pb-5">Results</h5>
+            <h5 class="result-heading pb-5">Results</h5>
             <div class="form-group">
                 <div class="input-group">
                   <div class="input-group-prepend">
